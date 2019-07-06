@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="./style.css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat|Satisfy&display=swap" rel="stylesheet">
+        <title>Etch-A-Sketch</title>
+    </head>
+    
+<body>
+    <div class="wrapper">
+        <div class="header">
+            Etch-A-Sketch
+        </div>
+        <div class="clear">
+            <button type="button" id="clear">Clear</button>
+        </div>
+    </div>
+
+    <div id="border">
+        <div id="container"></div>
+    </div>    
+    
+
+<script>
+function createGrid(row, column){
+    
+      for(i = 0; i < row; i++){
+        for (j = 0; j < column; j++) {
+            let Square = document.createElement("div"); 
+            Square.classList.add("square");
+            Square.style.width =`${780/row}px`;
+            Square.style.height =`${780/row}px`;
+            container.appendChild(Square);
+            Square.addEventListener("mouseover", paint) 
+        }
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    createGrid (16, 16);
+});
+
+function paint(e) {
+    e.target.classList.add("hover");
+}
+
+
+const clearButton = document.querySelector("#clear");
+clearButton.addEventListener("click", () => {
+    let docs = document.querySelectorAll(".hover")
+    docs.forEach(element => {
+        element.classList.remove("hover");
+    });
+    createPrompt();
+});
+
+function createPrompt() {
+    let newSize = prompt("Enter a size for the grid", 16);
+    var list = document.getElementById("container");
+    while (list.hasChildNodes()) {
+        list.removeChild(list.firstChild);
+    }
+    createGrid(newSize, newSize);
+    
+};
+
+
+</script>
+</body>
+</html>
